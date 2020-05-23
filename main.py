@@ -61,7 +61,8 @@ def get_parses(players, table):
   return table
 
 def main():
-  players = get_players(secrets.report_ids)
+  # players = get_players(secrets.report_ids)
+  players = secrets.team_players
   parses = get_parses(players, [])
   print('Table created')
   update_sheet(wks, parses)
