@@ -30,11 +30,12 @@ def get_raid_info(reports):
     for player in players:
       new_row = [
         report['date'],
-        report['id'],
-        report['title'],
+        str(report['id'], 'utf-8'),
+        str(report['title'], 'utf-8'),
         player['name'],
         player['id'],
       ]
+      # print(new_row)
       raid_info.append(new_row)
 
   return raid_info

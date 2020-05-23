@@ -46,17 +46,17 @@ def get_parses(players, table):
       if p['total'] > 0:
         new_row = [
           dt.datetime.fromtimestamp(p['startTime'] / 1000.0).strftime("%m/%d/%Y"), # date
-          p['characterName'].encode('utf-8'), # player
-          p['class'].encode('utf-8'), # class
-          p['spec'].encode('utf-8'), # spec
-          p['encounterName'].encode('utf-8'), # boss
+          p['characterName'], # player
+          p['class'], # class
+          p['spec'], # spec
+          p['encounterName'], # boss
           p['percentile'], # percentile
           p['total'] # dps / hps
         ]
         # print(new_row)
         table.append(new_row)
 
-    time.sleep(7)
+    time.sleep(8)
 
   return table
 

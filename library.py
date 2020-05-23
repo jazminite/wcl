@@ -31,7 +31,9 @@ def get_reports(zone):
 
 def get_table(report, table):
   print(report['date'], report['title'])
-  r = requests.get('https://classic.warcraftlogs.com/v1/report/tables/%s/%s?end=6160000&by=source&api_key=%s' % (table, report['id'], secrets.warcraft_logs_api_key))
+  table_url = 'https://classic.warcraftlogs.com/v1/report/tables/%s/%s?end=6160000&by=source&api_key=%s' % (table, str(report['id'], 'utf-8'), secrets.warcraft_logs_api_key)
+  print(table_url)
+  r = requests.get(table_url)
 
   return r.json()
 
@@ -49,7 +51,7 @@ def get_players(reports):
 
 def get_friendlies(report):
   friendlies = []
-  url = 'https://classic.warcraftlogs.com/v1/report/fights/%s?api_key=%s' % (report['id'], secrets.warcraft_logs_api_key)
+  url = 'https://classic.warcraftlogs.com/v1/report/fights/%s?api_key=%s' % (str(report['id'],'utf-8'), secrets.warcraft_logs_api_key)
   print(url)
   r = requests.get(url)
   r_json = r.json()

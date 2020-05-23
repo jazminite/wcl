@@ -43,9 +43,9 @@ def get_deaths(reports):
         kind = 'Friendly'
       new_row = [
           report['date'],
-          report['id'].encode('utf-8'),
-          report['title'].encode('utf-8'),
-          death['name'].encode('utf-8'),
+          str(report['id'], 'utf-8'),
+          str(report['title'], 'utf-8'),
+          death['name'],
           source,
           kind,
           1
