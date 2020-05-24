@@ -29,10 +29,14 @@ def get_reports(zone):
 
   return reports
 
-def get_table(report, table):
+def get_table(report, table, ability):
+  reportId = str(report['id'], 'utf-8')
   print(report['date'], report['title'])
-  table_url = 'https://classic.warcraftlogs.com/v1/report/tables/%s/%s?end=6160000&by=source&api_key=%s' % (table, str(report['id'], 'utf-8'), secrets.warcraft_logs_api_key)
-  print(table_url)
+  if ability:
+    table_url = 'https://classic.warcraftlogs.com/v1/report/tables/%s/%s?end=6160000&by=source&abilityid=%s&api_key=%s' % (table, reportId, ability, secrets.warcraft_logs_api_key)
+  else:
+    table_url = 'https://classic.warcraftlogs.com/v1/report/tables/%s/%s?end=6160000&by=source&api_key=%s' % (table, reportId, secrets.warcraft_logs_api_key)
+  # print(table_url)
   r = requests.get(table_url)
 
   return r.json()
