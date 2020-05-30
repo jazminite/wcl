@@ -36,7 +36,7 @@ def get_table(report, table, ability):
     table_url = 'https://classic.warcraftlogs.com/v1/report/tables/%s/%s?end=6160000&by=source&abilityid=%s&api_key=%s' % (table, reportId, ability, secrets.warcraft_logs_api_key)
   else:
     table_url = 'https://classic.warcraftlogs.com/v1/report/tables/%s/%s?end=6160000&by=source&api_key=%s' % (table, reportId, secrets.warcraft_logs_api_key)
-  # print(table_url)
+  print(table_url)
   r = requests.get(table_url)
 
   return r.json()
@@ -49,7 +49,11 @@ def get_players(reports):
     r = requests.get(url)
     r_json = r.json()
     for player in r_json['exportedCharacters']:
-      players.append(player['name'])
+      new_row = [
+        report,
+        player['name']
+      ]
+      players.append(new_row)
 
   return players
 

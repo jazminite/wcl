@@ -26,7 +26,7 @@ wks = wb.worksheet('deaths')
 def get_deaths(reports):
   deaths = []
   for report in reports:
-    r_json = get_table(report, 'deaths')
+    r_json = get_table(report, 'deaths', None)
     for death in r_json['entries']:
       sources = death['damage']['sources']
       if len(sources) > 0:

@@ -21,7 +21,6 @@ gc = gspread.authorize(credentials)
 service = build('sheets', 'v4', http=credentials.authorize(Http()))
 
 wb = gc.open_by_key(secrets.google_sheet_id)
-wks = wb.worksheet('parses')
 
 def get_parses(players, table):
   for player in players:
@@ -61,12 +60,15 @@ def get_parses(players, table):
   return table
 
 def main():
-  # players = get_players(secrets.report_ids)
-  players = secrets.team_players
-  parses = get_parses(players, [])
-  print('Table created')
-  update_sheet(wks, parses)
-  print('Worksheet updated')
+  wks = wb.worksheet('players')
+  players = get_players(secrets.report_ids)
+  update_sheet(wks, players)
+  # wks = wb.worksheet('parses')
+  # players = secrets.team_players
+  # parses = get_parses(players, [])
+  # print('Table created')
+  # update_sheet(wks, parses)
+  # print('Worksheet updated')
 
 if __name__ == '__main__':
   main()
