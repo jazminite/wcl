@@ -14,15 +14,16 @@ def get_reports(zone):
   r_json = r.json()
 
   reports = []
-  dates = []
+  titles = []
   for report in r_json:
     if report['zone'] == zone:
       start_date = dt.datetime.fromtimestamp(report['start'] / 1000.0).strftime("%m/%d/%Y")
-      if start_date not in dates:
-        dates.append(start_date)
+      title = report['title'].encode('utf-8')
+      if title not in titles:
+        titles.append(title)
         new_row = {
             'id': report['id'].encode('utf-8'),
-            'title': report['title'].encode('utf-8'),
+            'title': title,
             'date': start_date
         }
         reports.append(new_row)

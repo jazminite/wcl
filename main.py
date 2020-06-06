@@ -27,7 +27,8 @@ def get_parses(players, table):
     print(player)
     metric = 'dps'
     spec = 'dps'
-    r = requests.get('https://classic.warcraftlogs.com/v1/parses/character/%s/Faerlina/US?api_key=%s&timeframe=historical&metric=%s' % (player, secrets.warcraft_logs_api_key, metric))
+    request_url = 'https://classic.warcraftlogs.com/v1/parses/character/%s/Faerlina/US?api_key=%s&timeframe=historical&metric=%s' % (player, secrets.warcraft_logs_api_key, metric)
+    r = requests.get(request_url)
     char_parse = r.json()
 
     try:
@@ -38,7 +39,7 @@ def get_parses(players, table):
 
     if spec == 'Healer':
       metric = 'hps'
-      r = requests.get('https://classic.warcraftlogs.com/v1/parses/character/%s/Faerlina/US?api_key=%s&timeframe=historical&metric=%s' % (player, secrets.warcraft_logs_api_key, metric))
+      r = requests.get(request_url)
       char_parse = r.json()
 
     for p in char_parse:
