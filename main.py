@@ -38,6 +38,7 @@ def get_parses(players, table):
       print(char_parse)
 
     if spec == 'Healer':
+      time.sleep(8)
       metric = 'hps'
       r = requests.get(request_url)
       char_parse = r.json()
