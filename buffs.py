@@ -23,28 +23,29 @@ service = build('sheets', 'v4', http=credentials.authorize(Http()))
 wb = gc.open_by_key(secrets.google_sheet_id)
 wks = wb.worksheet('buffs')
 
-def get_buffs(reports, ability):
+def get_buffs(reports, buff_ids):
   buffs = []
   for report in reports:
-    r_json = get_table(report, 'buffs', ability)
-    for player in r_json['auras']:
-      new_row = [
-        report['date'],
-        str(report['id'], 'utf-8'),
-        str(report['title'], 'utf-8'),
-        player['name'],
-        player['id'],
-        ability
-      ]
-      # print(new_row)
-      buffs.append(new_row)
+    for ability in buff_ids:
+      r_json = get_table(report, 'buffs', ability)
+      for player in r_json['auras']:
+        new_row = [
+          report['date'],
+          str(report['id'], 'utf-8'),
+          str(report['title'], 'utf-8'),
+          player['name'],
+          player['id'],
+          ability
+        ]
+        # print(new_row)
+        buffs.append(new_row)
 
   return buffs
 
 def main():
   reports = get_reports(1002)
   print('Reports retrieved')
-  buffs = get_buffs(reports, '22888') # Ony buff
+  buffs = get_buffs(reports, secrets.buff_ids)
   print('Buffs retrieved')
   update_sheet(wks, buffs)
   print('Worksheet updated')
