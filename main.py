@@ -25,9 +25,8 @@ wb = gc.open_by_key(secrets.google_sheet_id)
 def get_parses(players, table):
   for player in players:
     print(player)
-    metric = 'dps'
     spec = 'dps'
-    request_url = 'https://classic.warcraftlogs.com/v1/parses/character/%s/Faerlina/US?api_key=%s&timeframe=historical&metric=%s' % (player, secrets.warcraft_logs_api_key, metric)
+    request_url = 'https://classic.warcraftlogs.com/v1/parses/character/%s/Faerlina/US?api_key=%s&timeframe=historical&metric=%s' % (player, secrets.warcraft_logs_api_key, spec)
     r = requests.get(request_url)
     char_parse = r.json()
 
@@ -38,8 +37,7 @@ def get_parses(players, table):
       print(char_parse)
 
     if spec == 'Healer':
-      time.sleep(8)
-      metric = 'hps'
+      request_url = 'https://classic.warcraftlogs.com/v1/parses/character/%s/Faerlina/US?api_key=%s&timeframe=historical&metric=hps' % (player, secrets.warcraft_logs_api_key)
       r = requests.get(request_url)
       char_parse = r.json()
 
