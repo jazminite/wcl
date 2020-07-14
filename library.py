@@ -9,7 +9,7 @@ import datetime as dt
 import gspread
 import time
 
-def get_reports(zone):
+def get_reports(zone, c_date):
   r = requests.get('https://classic.warcraftlogs.com/v1/reports/guild/Quintessential/Faerlina/US?api_key=%s' % (secrets.warcraft_logs_api_key))
   r_json = r.json()
 
@@ -17,16 +17,17 @@ def get_reports(zone):
   titles = []
   for report in r_json:
     if report['zone'] == zone:
-      start_date = dt.datetime.fromtimestamp(report['start'] / 1000.0).strftime("%m/%d/%Y")
-      title = report['title'].encode('utf-8')
-      if title not in titles:
-        titles.append(title)
-        new_row = {
-            'id': report['id'].encode('utf-8'),
-            'title': title,
-            'date': start_date
-        }
-        reports.append(new_row)
+      raid_date = dt.datetime.fromtimestamp(report['start'] / 1000.0)
+      if raid_date > c_date:
+        title = report['title'].encode('utf-8')
+        if title not in titles:
+          titles.append(title)
+          new_row = {
+              'id': report['id'].encode('utf-8'),
+              'title': title,
+              'date': raid_date.strftime("%m/%d/%Y")
+          }
+          reports.append(new_row)
 
   return reports
 
@@ -45,16 +46,18 @@ def get_table(report, table, ability):
 def get_players(reports):
   players = []
   for report in reports:
-    url = 'https://classic.warcraftlogs.com/v1/report/fights/%s?api_key=%s' % (report, secrets.warcraft_logs_api_key)
+    report_id = str(report['id'],'utf-8')
+    url = 'https://classic.warcraftlogs.com/v1/report/fights/%s?api_key=%s' % (report_id, secrets.warcraft_logs_api_key)
     print(url)
     r = requests.get(url)
     r_json = r.json()
     for player in r_json['exportedCharacters']:
-      new_row = [
-        report,
-        player['name']
-      ]
-      players.append(new_row)
+      # new_row = [
+      #   report_id,
+      #   player['name']
+      # ]
+      # players.append(new_row)
+      players.append(player['name'])
 
   return players
 

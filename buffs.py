@@ -21,7 +21,7 @@ gc = gspread.authorize(credentials)
 service = build('sheets', 'v4', http=credentials.authorize(Http()))
 
 wb = gc.open_by_key(secrets.google_sheet_id)
-wks = wb.worksheet('buffs')
+wks = wb.worksheet('add_buffs')
 
 def get_buffs(reports, buff_ids):
   buffs = []
@@ -43,7 +43,7 @@ def get_buffs(reports, buff_ids):
   return buffs
 
 def main():
-  reports = get_reports(1002)
+  reports = get_reports(secrets.raid_id, secrets.c_date)
   print('Reports retrieved')
   buffs = get_buffs(reports, secrets.buff_ids)
   print('Buffs retrieved')

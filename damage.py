@@ -42,7 +42,7 @@ def get_damage(reports, ability):
   return damage
 
 def main():
-  reports = get_reports(1002)
+  reports = get_reports(secrets.raid_id, secrets.c_date)
   print('Reports retrieved')
   damage = get_damage(reports, '13241')
   print('Damage retrieved')
