@@ -33,17 +33,6 @@ def get_parses(players, table):
     r = requests.get(request_url)
     char_parse = r.json()
 
-    # try:
-    #   spec = char_parse[0]['spec']
-    # except:
-    #   print('Error getting spec for ' + player)
-    #   print(char_parse)
-
-    # if spec == 'Healer':
-    #   request_url = 'https://classic.warcraftlogs.com/v1/parses/character/%s/Faerlina/US?api_key=%s&timeframe=historical&metric=hps' % (player, secrets.warcraft_logs_api_key)
-    #   r = requests.get(request_url)
-    #   char_parse = r.json()
-
     for p in char_parse:
       if p['total'] > 0:
         raid_date = dt.datetime.fromtimestamp(p['startTime'] / 1000.0)

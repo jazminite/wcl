@@ -22,54 +22,11 @@ service = build('sheets', 'v4', http=credentials.authorize(Http()))
 
 wb = gc.open_by_key(secrets.google_sheet_id)
 
-def get_parses(players, table):
-  for player in players:
-    print(player)
-    spec = 'dps'
-    request_url = 'https://classic.warcraftlogs.com/v1/parses/character/%s/Faerlina/US?api_key=%s&timeframe=historical&metric=%s' % (player, secrets.warcraft_logs_api_key, spec)
-    r = requests.get(request_url)
-    char_parse = r.json()
-
-    try:
-      spec = char_parse[0]['spec']
-    except:
-      print('Error getting spec for ' + player)
-      print(char_parse)
-
-    if spec == 'Healer':
-      request_url = 'https://classic.warcraftlogs.com/v1/parses/character/%s/Faerlina/US?api_key=%s&timeframe=historical&metric=hps' % (player, secrets.warcraft_logs_api_key)
-      r = requests.get(request_url)
-      char_parse = r.json()
-
-    for p in char_parse:
-      if p['total'] > 0:
-        new_row = [
-          dt.datetime.fromtimestamp(p['startTime'] / 1000.0).strftime("%m/%d/%Y"), # date
-          p['characterName'], # player
-          p['class'], # class
-          p['spec'], # spec
-          p['encounterName'], # boss
-          p['percentile'], # percentile
-          p['total'] # dps / hps
-        ]
-        # print(new_row)
-        table.append(new_row)
-
-    time.sleep(8)
-
-  return table
-
 def main():
   wks = wb.worksheet('players')
   reports = get_reports(secrets.raid_id, secrets.c_date)
   players = get_player_rows(reports)
   update_sheet(wks, players)
-  # wks = wb.worksheet('parses')
-  # players = secrets.team_players
-  # parses = get_parses(players, [])
-  # print('Table created')
-  # update_sheet(wks, parses)
-  # print('Worksheet updated')
 
 if __name__ == '__main__':
   main()
