@@ -61,6 +61,23 @@ def get_players(reports):
 
   return players
 
+def get_player_rows(reports):
+  players = []
+  for report in reports:
+    report_id = str(report['id'],'utf-8')
+    url = 'https://classic.warcraftlogs.com/v1/report/fights/%s?api_key=%s' % (report_id, secrets.warcraft_logs_api_key)
+    print(url)
+    r = requests.get(url)
+    r_json = r.json()
+    for player in r_json['exportedCharacters']:
+      new_row = [
+        report_id,
+        player['name']
+      ]
+      players.append(new_row)
+
+  return players
+
 def get_friendlies(report):
   friendlies = []
   url = 'https://classic.warcraftlogs.com/v1/report/fights/%s?api_key=%s' % (str(report['id'],'utf-8'), secrets.warcraft_logs_api_key)

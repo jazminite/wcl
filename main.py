@@ -2,7 +2,7 @@
 from __future__ import division
 import secrets
 from sheets import update_sheet
-from library import get_players
+from library import get_player_rows, get_reports
 
 # Libraries
 import requests
@@ -61,7 +61,8 @@ def get_parses(players, table):
 
 def main():
   wks = wb.worksheet('players')
-  players = get_players(secrets.report_ids)
+  reports = get_reports(secrets.raid_id, secrets.c_date)
+  players = get_player_rows(reports)
   update_sheet(wks, players)
   # wks = wb.worksheet('parses')
   # players = secrets.team_players
