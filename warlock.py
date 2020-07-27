@@ -21,7 +21,6 @@ gc = gspread.authorize(credentials)
 service = build('sheets', 'v4', http=credentials.authorize(Http()))
 
 wb = gc.open_by_key(secrets.google_sheet_id)
-wks = wb.worksheet('warlock')
 
 def get_casts(reports, table, abilities, encounter):
   casts = []
@@ -36,10 +35,10 @@ def get_casts(reports, table, abilities, encounter):
       total_time = r_json['totalTime']
       for player in r_json['entries']:
         try:
-          uptime = player['uptime']
           no_casts = player['total']
+          uptime = player['uptime']
         except:
-          print('Error getting uptime for ' + player['name'])
+          print('No uptime for ' + player['name'] + ' - ' + ability)
           uptime = 0
 
         new_row = [
@@ -59,9 +58,11 @@ def get_casts(reports, table, abilities, encounter):
   return casts
 
 def main():
-  reports = get_reports(1002)
+  wks = wb.worksheet('add_warlock')
+  reports = get_reports(secrets.raid_id, secrets.c_date)
   print('Reports retrieved')
-  cast_info = get_casts(reports, 'casts', ['11717', '17937', '11722', '11713', '11672'], '-2')
+  # cast_info = get_casts(reports, 'casts', ['11717', '17937', '11722', '11713', '11672', '11661'], '-2')
+  cast_info = get_casts(reports, 'casts', ['11661'], '-2')
   print('Cast info retrieved')
   update_sheet(wks, cast_info)
   print('Worksheet updated')
