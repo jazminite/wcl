@@ -31,6 +31,28 @@ def get_reports(zone, c_date):
 
   return reports
 
+def get_all_reports(c_date):
+  r = requests.get('https://classic.warcraftlogs.com/v1/reports/guild/Quintessential/Faerlina/US?api_key=%s' % (secrets.warcraft_logs_api_key))
+  r_json = r.json()
+
+  reports = []
+  titles = []
+  for report in r_json:
+    raid_date = dt.datetime.fromtimestamp(report['start'] / 1000.0)
+    if raid_date > c_date:
+      title = report['title'].encode('utf-8')
+      if title not in titles:
+        titles.append(title)
+        new_row = {
+            'id': report['id'].encode('utf-8'),
+            'title': title,
+            'date': raid_date.strftime("%m/%d/%Y"),
+            'zone': report['zone'],
+        }
+        reports.append(new_row)
+
+  return reports
+
 def get_table(report, table, ability):
   reportId = str(report['id'], 'utf-8')
   print(report['date'], report['title'])

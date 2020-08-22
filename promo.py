@@ -2,7 +2,7 @@
 from __future__ import division
 import secrets
 from sheets import update_sheet
-from library import get_reports, get_table, get_friendlies
+from library import get_all_reports, get_table, get_friendlies
 
 # Libraries
 import requests
@@ -32,6 +32,7 @@ def get_raid_info(reports):
         report['date'],
         str(report['id'], 'utf-8'),
         str(report['title'], 'utf-8'),
+        report['zone'],
         player['name'],
         player['id'],
       ]
@@ -41,7 +42,7 @@ def get_raid_info(reports):
   return raid_info
 
 def main():
-  reports = get_reports(secrets.raid_id, secrets.c_date)
+  reports = get_all_reports(secrets.c_date)
   print('Reports retrieved')
   raid_info = get_raid_info(reports)
   print('Raid info retrieved')
