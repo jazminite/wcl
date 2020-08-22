@@ -23,6 +23,7 @@ service = build('sheets', 'v4', http=credentials.authorize(Http()))
 wb = gc.open_by_key(secrets.google_sheet_id)
 
 def get_parses(players, table):
+  print(players)
   for player in players:
     print(player)
     spec = 'dps'

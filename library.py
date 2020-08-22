@@ -74,12 +74,9 @@ def get_players(reports):
     r = requests.get(url)
     r_json = r.json()
     for player in r_json['exportedCharacters']:
-      # new_row = [
-      #   report_id,
-      #   player['name']
-      # ]
-      # players.append(new_row)
-      players.append(player['name'])
+      player = player['name']
+      if player not in players:
+        players.append(player)
 
   return players
 

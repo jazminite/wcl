@@ -24,35 +24,71 @@ wb = gc.open_by_key(secrets.google_sheet_id)
 wks = wb.worksheet('add_deaths')
 
 def get_deaths(reports):
-  deaths = []
+  death_table = []
   for report in reports:
-    r_json = get_table(report, 'deaths', None)
-    for death in r_json['entries']:
-      sources = death['damage']['sources']
-      if len(sources) > 0:
-        source = sources[0]['name']
-        dmg_type = sources[0]['type']
-        if dmg_type == 'Boss':
-          kind = 'Boss'
-        elif dmg_type == 'NPC':
-          kind = 'Trash'
-        else:
-          kind = 'Friendly'
-      else:
-        source = 'Divine Intervention'
-        kind = 'Friendly'
-      new_row = [
-          report['date'],
-          str(report['id'], 'utf-8'),
-          str(report['title'], 'utf-8'),
-          death['name'],
-          source,
-          kind,
-          1
-      ]
-      deaths.append(new_row)
+    r_json = get_table(report, 'survivability', None)
+    players = r_json['players']
+    for player in players:
+      fights = player['fights']
+      for fight in fights:
+        deaths = fight['deaths']
+        for death in deaths:
+          sources = death['damage']['sources']
+          if len(sources) > 0:
+            source = sources[0]['name']
+            dmg_type = sources[0]['type']
+            if dmg_type == 'Boss':
+              kind = 'Boss'
+            elif dmg_type == 'NPC':
+              kind = 'Trash'
+            else:
+              kind = 'Friendly'
+          else:
+            source = 'Divine Intervention'
+            kind = 'Friendly'
+          new_row = [
+              report['date'],
+              str(report['id'], 'utf-8'),
+              str(report['title'], 'utf-8'),
+              player['name'],
+              source,
+              kind,
+              1
+          ]
+          death_table.append(new_row)
 
-  return deaths
+  return death_table
+
+# def get_deaths(reports):
+#   deaths = []
+#   for report in reports:
+#     r_json = get_table(report, 'deaths', None)
+#     for death in r_json['entries']:
+#       sources = death['damage']['sources']
+#       if len(sources) > 0:
+#         source = sources[0]['name']
+#         dmg_type = sources[0]['type']
+#         if dmg_type == 'Boss':
+#           kind = 'Boss'
+#         elif dmg_type == 'NPC':
+#           kind = 'Trash'
+#         else:
+#           kind = 'Friendly'
+#       else:
+#         source = 'Divine Intervention'
+#         kind = 'Friendly'
+#       new_row = [
+#           report['date'],
+#           str(report['id'], 'utf-8'),
+#           str(report['title'], 'utf-8'),
+#           death['name'],
+#           source,
+#           kind,
+#           1
+#       ]
+#       deaths.append(new_row)
+
+#   return deaths
 
 def main():
   reports = get_reports(secrets.raid_id, secrets.c_date)
