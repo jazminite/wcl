@@ -30,9 +30,10 @@ These scripts are used to pull information from classic.warcraftlogs.com via the
 ### Parses
 
 1. `secrets.py`: Update the date
+2. `players`: Remove data from columns A to C
 2. `python main.py`: Get a list of players from recent reports
 3. `player-export`: Export the guild roster from the game
-4. `players`: Filter out people not in the guild, Copy new players to other column
+4. `players`: Copy new players from column B to F, Filter out people not in the guild
 5. `current-players`: Update current players with the teams spreadsheet
 6. `players`: Update missing player specs
 7. `secrets.py`: Update healers array

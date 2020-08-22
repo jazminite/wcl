@@ -44,7 +44,7 @@ def get_damage(reports, ability):
 def main():
   reports = get_reports(secrets.raid_id, secrets.c_date)
   print('Reports retrieved')
-  damage = get_damage(reports, '13241')
+  damage = get_damage(reports, '13241') # Sapper charge
   print('Damage retrieved')
   update_sheet(wks, damage)
   print('Worksheet updated')
