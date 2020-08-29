@@ -61,7 +61,8 @@ def main():
   wks = wb.worksheet('add_warlock')
   reports = get_reports(secrets.raid_id, secrets.c_date)
   print('Reports retrieved')
-  cast_info = get_casts(reports, 'casts', ['11717', '17937', '11722', '11713', '11672', '11661'], '-2')
+  abilities = ['11717', '17937', '11722', '11713', '11672', '11661', '25307']
+  cast_info = get_casts(reports, 'casts', abilities, '-2')
   print('Cast info retrieved')
   update_sheet(wks, cast_info)
   print('Worksheet updated')
