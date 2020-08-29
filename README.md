@@ -50,6 +50,8 @@ For other reports, clear the `add_<NAME>` sheet, then run the script:
 - `python buffs.py`: Buffs
 - `python deaths.py`: Deaths
 - `python promo.py`: Promotions
+- `python warrior.py`: Warriors
+- `python warlock.py`: Warlocks
 
 ## Post
 
