@@ -61,7 +61,7 @@ def main():
   wks = wb.worksheet('add_warrior')
   reports = get_reports(secrets.raid_id, secrets.c_date)
   print('Reports retrieved')
-  cast_info = get_casts(reports, 'casts', ['11597', '12328', '24427'], '-3')
+  cast_info = get_casts(reports, 'casts', ['11597', '12328', '24427', '25891'], '-3')
   print('Cast info retrieved')
   update_sheet(wks, cast_info)
   print('Worksheet updated')
