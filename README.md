@@ -48,6 +48,7 @@ These scripts are used to pull information from classic.warcraftlogs.com via the
 For other reports, clear the `add_<NAME>` sheet, then run the script:
 
 - `python buffs.py`: Buffs
+- `python caster.py`: Caster
 - `python deaths.py`: Deaths
 - `python promo.py`: Promotions
 - `python warrior.py`: Warriors
@@ -60,3 +61,8 @@ For other reports, clear the `add_<NAME>` sheet, then run the script:
 - World Buff Report
 - Top 10 DPS
 - Raid Analysis sheet link
+
+## TODO
+
+- Add effective sunders: https://discordapp.com/channels/617446636494520352/635538701765574656/754818352664412291
+- Add Rogue kicks on Skeram

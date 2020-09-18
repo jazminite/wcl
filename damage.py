@@ -34,6 +34,7 @@ def get_damage(reports, ability):
         str(report['title'], 'utf-8'),
         player['name'],
         player['id'],
+        player['total'],
         ability
       ]
       # print(new_row)
