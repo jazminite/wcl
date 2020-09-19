@@ -2,7 +2,7 @@
 from __future__ import division
 import secrets
 from sheets import update_sheet
-from library import get_reports
+from library import get_reports, get_casts
 
 # Libraries
 import requests
@@ -22,51 +22,17 @@ service = build('sheets', 'v4', http=credentials.authorize(Http()))
 
 wb = gc.open_by_key(secrets.google_sheet_id)
 
-def get_casts(reports, table, abilities, encounter):
-  casts = []
-  for report in reports:
-    reportId = str(report['id'], 'utf-8')
-    print(report['date'], report['title'])
-    for ability in abilities:
-      table_url = 'https://classic.warcraftlogs.com/v1/report/tables/%s/%s?end=36000000&by=source&abilityid=%s&encounter=%s&api_key=%s' % (table, reportId, ability, encounter, secrets.warcraft_logs_api_key)
-      # print(table_url)
-      r = requests.get(table_url)
-      r_json = r.json()
-      total_time = r_json['totalTime']
-      for player in r_json['entries']:
-        try:
-          no_casts = player['total']
-          uptime = player['uptime']
-        except:
-          print('No uptime for ' + player['name'] + ' - ' + ability)
-          uptime = 0
-
-        new_row = [
-          report['date'],
-          str(report['id'], 'utf-8'),
-          str(report['title'], 'utf-8'),
-          player['name'],
-          no_casts,
-          total_time,
-          uptime,
-          uptime / total_time,
-          ability
-        ]
-        print(new_row)
-        casts.append(new_row)
-
-  return casts
-
 def main():
-  wks = wb.worksheet('rogue')
+  wks = wb.worksheet('add_rogue')
   reports = get_reports(secrets.raid_id, secrets.c_date)
   print('Reports retrieved')
-  cast_info = get_casts(reports, 'casts', ['13877', '13750', '25891'], '-3')
+  encounters = ['709', '710', '711', '712', '713', '714', '715', '716', '717', '-3']
+  abilities = ['13877', '13750', '25891', '1769']
+  cast_info = get_casts(reports, 'casts', encounters, abilities)
   print('Cast info retrieved')
+  # print(cast_info)
   update_sheet(wks, cast_info)
   print('Worksheet updated')
 
 if __name__ == '__main__':
   main()
-
-

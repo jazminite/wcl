@@ -111,3 +111,40 @@ def get_friendlies(report):
     friendlies.append(new_row)
 
   return friendlies
+
+def get_casts(reports, table, encounters, abilities):
+  casts = []
+  for report in reports:
+    reportId = str(report['id'], 'utf-8')
+    print(report['date'], report['title'])
+    for encounter in encounters:
+      for ability in abilities:
+        table_url = 'https://classic.warcraftlogs.com/v1/report/tables/%s/%s?end=36000000&by=source&abilityid=%s&encounter=%s&api_key=%s' % (table, reportId, ability, encounter, secrets.warcraft_logs_api_key)
+        # print(table_url)
+        r = requests.get(table_url)
+        r_json = r.json()
+        total_time = r_json['totalTime']
+        for player in r_json['entries']:
+          try:
+            no_casts = player['total']
+            uptime = player['uptime']
+          except:
+            # print('No uptime for ' + player['name'] + ' - ' + ability)
+            uptime = 0
+
+          new_row = [
+            report['date'],
+            str(report['id'], 'utf-8'),
+            str(report['title'], 'utf-8'),
+            player['name'],
+            no_casts,
+            total_time,
+            uptime,
+            uptime / total_time,
+            ability,
+            encounter
+          ]
+          # print(new_row)
+          casts.append(new_row)
+
+  return casts
