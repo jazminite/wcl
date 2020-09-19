@@ -23,7 +23,7 @@ service = build('sheets', 'v4', http=credentials.authorize(Http()))
 wb = gc.open_by_key(secrets.google_sheet_id)
 
 def main():
-  wks = wb.worksheet('paladin')
+  wks = wb.worksheet('add_paladin')
   reports = get_reports(secrets.raid_id, secrets.c_date)
   print('Reports retrieved')
   encounters = ['-3']
