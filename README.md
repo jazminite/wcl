@@ -63,7 +63,9 @@ For other reports, clear the `add_<NAME>` sheet, then run the script:
 - Raid time comparisons
 - Death Report
 - World Buff Report
-- Top 10 DPS
+- Class and Role reports
 - Raid Analysis sheet link
 
 ## TODO
+
+- Warlock Analysis (see pins in #warlock)
