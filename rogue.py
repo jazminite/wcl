@@ -27,7 +27,7 @@ def main():
   reports = get_reports(secrets.raid_id, secrets.c_date)
   print('Reports retrieved')
   encounters = ['709', '710', '711', '712', '713', '714', '715', '716', '717', '-3']
-  abilities = ['13877', '13750', '25891', '1769']
+  abilities = ['13877', '13750', '25891', '1769', '24532', '9512']
   cast_info = get_casts(reports, 'casts', encounters, abilities)
   print('Cast info retrieved')
   # print(cast_info)
