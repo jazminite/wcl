@@ -2,7 +2,7 @@
 from __future__ import division
 import secrets
 from sheets import update_sheet
-from library import get_reports
+from library import get_reports, get_casts
 
 # Libraries
 import requests
@@ -22,51 +22,57 @@ service = build('sheets', 'v4', http=credentials.authorize(Http()))
 
 wb = gc.open_by_key(secrets.google_sheet_id)
 
-def get_casts(reports, table, abilities, encounter):
-  casts = []
+def get_debuffs(reports, table, encounters, abilities, sheet_info):
   for report in reports:
     reportId = str(report['id'], 'utf-8')
     print(report['date'], report['title'])
-    for ability in abilities:
-      table_url = 'https://classic.warcraftlogs.com/v1/report/tables/%s/%s?end=36000000&by=source&abilityid=%s&encounter=%s&api_key=%s' % (table, reportId, ability, encounter, secrets.warcraft_logs_api_key)
-      # print(table_url)
-      r = requests.get(table_url)
-      r_json = r.json()
-      total_time = r_json['totalTime']
-      for player in r_json['entries']:
-        try:
-          no_casts = player['total']
-          uptime = player['uptime']
-        except:
-          print('No uptime for ' + player['name'] + ' - ' + ability)
-          uptime = 0
+    for encounter in encounters:
+      for ability in abilities:
+        table_url = 'https://classic.warcraftlogs.com/v1/report/tables/%s/%s?end=36000000&by=target&abilityid=%s&encounter=%s&api_key=%s' % (table, reportId, ability, encounter, secrets.warcraft_logs_api_key)
+        # print(table_url)
+        r = requests.get(table_url)
+        r_json = r.json()
+        total_time = r_json['totalTime']
+        for player in r_json['auras']:
+          try:
+            no_casts = player['totalUses']
+            uptime = player['uptime']
+          except:
+            # print('No uptime for ' + player['name'] + ' - ' + ability)
+            uptime = 0
 
-        new_row = [
-          report['date'],
-          str(report['id'], 'utf-8'),
-          str(report['title'], 'utf-8'),
-          player['name'],
-          no_casts,
-          total_time,
-          uptime,
-          uptime / total_time,
-          ability
-        ]
-        print(new_row)
-        casts.append(new_row)
-
-  return casts
+          new_row = [
+            report['date'],
+            str(report['id'], 'utf-8'),
+            str(report['title'], 'utf-8'),
+            player['name'],
+            no_casts,
+            total_time,
+            uptime,
+            uptime / total_time,
+            ability,
+            encounter
+          ]
+          # print(new_row)
+          sheet_info.append(new_row)
+  return sheet_info
 
 def main():
   wks = wb.worksheet('add_warrior')
   reports = get_reports(secrets.raid_id, secrets.c_date)
   print('Reports retrieved')
-  cast_info = get_casts(reports, 'casts', ['11597', '12328', '24427', '25891'], '-3')
+
+  encounters = ['-3']
+  abilities = ['12328', '24427', '25891']
+  cast_info = get_casts(reports, 'casts', encounters, abilities)
+
+  abilities = ['11597']
+  sheet_info = get_debuffs(reports, 'debuffs', encounters, abilities, cast_info)
+  print(cast_info)
+
   print('Cast info retrieved')
-  update_sheet(wks, cast_info)
+  update_sheet(wks, sheet_info)
   print('Worksheet updated')
 
 if __name__ == '__main__':
   main()
-
-
