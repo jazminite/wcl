@@ -49,6 +49,7 @@ For other reports, clear the `add_<NAME>` sheet, then run the script:
 
 - `python buffs.py`: Buffs
 - `python caster.py`: Caster
+- `python damage.py`: Damage - Sappers
 - `python deaths.py`: Deaths
 - `python promo.py`: Promotions
 - `python warrior.py`: Warriors

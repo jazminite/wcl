@@ -21,7 +21,7 @@ gc = gspread.authorize(credentials)
 service = build('sheets', 'v4', http=credentials.authorize(Http()))
 
 wb = gc.open_by_key(secrets.google_sheet_id)
-wks = wb.worksheet('damage')
+wks = wb.worksheet('add_damage')
 
 def get_damage(reports, ability):
   damage = []
