@@ -1,7 +1,6 @@
 # Files
 from __future__ import division
 import secrets
-from sheets import update_sheet
 from library import get_reports
 
 # Libraries
@@ -60,14 +59,14 @@ def get_casts(reports, table, encounters, abilities):
   return casts
 
 def main():
-  wks = wb.worksheet('add_caster')
   reports = get_reports(secrets.raid_id, secrets.c_date)
   print('Reports retrieved')
   encounters = ['-3']
   abilities = ['23271','24659']
   cast_info = get_casts(reports, 'buffs', encounters, abilities)
   print('Cast info retrieved')
-  update_sheet(wks, cast_info)
+  wks = wb.worksheet('caster')
+  wks.append_rows(cast_info, 'USER_ENTERED')
   print('Worksheet updated')
 
 if __name__ == '__main__':

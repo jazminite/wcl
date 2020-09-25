@@ -55,12 +55,12 @@ def get_all_reports(c_date):
 
 def get_table(report, table, ability):
   reportId = str(report['id'], 'utf-8')
-  print(report['date'], report['title'])
+  print(report['date'], report['title'], reportId)
   if ability:
     table_url = 'https://classic.warcraftlogs.com/v1/report/tables/%s/%s?end=36000000&by=source&abilityid=%s&api_key=%s' % (table, reportId, ability, secrets.warcraft_logs_api_key)
   else:
     table_url = 'https://classic.warcraftlogs.com/v1/report/tables/%s/%s?end=36000000&by=source&api_key=%s' % (table, reportId, secrets.warcraft_logs_api_key)
-  print(table_url)
+  # print(table_url)
   r = requests.get(table_url)
 
   return r.json()
@@ -70,7 +70,7 @@ def get_players(reports):
   for report in reports:
     report_id = str(report['id'],'utf-8')
     url = 'https://classic.warcraftlogs.com/v1/report/fights/%s?api_key=%s' % (report_id, secrets.warcraft_logs_api_key)
-    print(url)
+    # print(url)
     r = requests.get(url)
     r_json = r.json()
     for player in r_json['exportedCharacters']:
@@ -100,7 +100,7 @@ def get_player_rows(reports):
 def get_friendlies(report):
   friendlies = []
   url = 'https://classic.warcraftlogs.com/v1/report/fights/%s?api_key=%s' % (str(report['id'],'utf-8'), secrets.warcraft_logs_api_key)
-  print(url)
+  # print(url)
   r = requests.get(url)
   r_json = r.json()
   for player in r_json['friendlies']:

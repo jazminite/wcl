@@ -58,20 +58,18 @@ def get_debuffs(reports, table, encounters, abilities, sheet_info):
   return sheet_info
 
 def main():
-  wks = wb.worksheet('add_warrior')
   reports = get_reports(secrets.raid_id, secrets.c_date)
   print('Reports retrieved')
 
   encounters = ['-3']
   abilities = ['12328', '24427', '25891']
-  cast_info = get_casts(reports, 'casts', encounters, abilities)
-
+  start_info = get_casts(reports, 'casts', encounters, abilities)
   abilities = ['11597']
-  sheet_info = get_debuffs(reports, 'debuffs', encounters, abilities, cast_info)
-  print(cast_info)
-
+  cast_info = get_debuffs(reports, 'debuffs', encounters, abilities, start_info)
   print('Cast info retrieved')
-  update_sheet(wks, sheet_info)
+
+  wks = wb.worksheet('warrior')
+  wks.append_rows(cast_info, 'USER_ENTERED')
   print('Worksheet updated')
 
 if __name__ == '__main__':

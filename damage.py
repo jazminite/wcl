@@ -1,7 +1,6 @@
 # Files
 from __future__ import division
 import secrets
-from sheets import update_sheet
 from library import get_reports, get_table
 
 # Libraries
@@ -21,33 +20,35 @@ gc = gspread.authorize(credentials)
 service = build('sheets', 'v4', http=credentials.authorize(Http()))
 
 wb = gc.open_by_key(secrets.google_sheet_id)
-wks = wb.worksheet('add_damage')
 
-def get_damage(reports, ability):
+def get_damage(reports, abilities):
   damage = []
   for report in reports:
-    r_json = get_table(report, 'damage-done', ability)
-    for player in r_json['entries']:
-      new_row = [
-        report['date'],
-        str(report['id'], 'utf-8'),
-        str(report['title'], 'utf-8'),
-        player['name'],
-        player['id'],
-        player['total'],
-        ability
-      ]
-      # print(new_row)
-      damage.append(new_row)
+    for ability in abilities:
+      r_json = get_table(report, 'damage-done', ability)
+      for player in r_json['entries']:
+        new_row = [
+          report['date'],
+          str(report['id'], 'utf-8'),
+          str(report['title'], 'utf-8'),
+          player['name'],
+          player['id'],
+          player['total'],
+          ability
+        ]
+        # print(new_row)
+        damage.append(new_row)
 
   return damage
 
 def main():
   reports = get_reports(secrets.raid_id, secrets.c_date)
   print('Reports retrieved')
-  damage = get_damage(reports, '13241') # Sapper charge
+  abilities = ['13241', '23063']
+  damage = get_damage(reports,  abilities)
   print('Damage retrieved')
-  update_sheet(wks, damage)
+  wks = wb.worksheet('damage')
+  wks.append_rows(damage, 'USER_ENTERED')
   print('Worksheet updated')
 
 if __name__ == '__main__':

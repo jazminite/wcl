@@ -1,7 +1,6 @@
 # Files
 from __future__ import division
 import secrets
-from sheets import update_sheet
 from library import get_reports, get_casts
 
 # Libraries
@@ -23,15 +22,14 @@ service = build('sheets', 'v4', http=credentials.authorize(Http()))
 wb = gc.open_by_key(secrets.google_sheet_id)
 
 def main():
-  wks = wb.worksheet('add_paladin')
   reports = get_reports(secrets.raid_id, secrets.c_date)
   print('Reports retrieved')
   encounters = ['-3']
   abilities = ['10278', '4987', '10310']
   cast_info = get_casts(reports, 'casts', encounters, abilities)
   print('Cast info retrieved')
-  # print(cast_info)
-  update_sheet(wks, cast_info)
+  wks = wb.worksheet('paladin')
+  wks.append_rows(cast_info, 'USER_ENTERED')
   print('Worksheet updated')
 
 if __name__ == '__main__':

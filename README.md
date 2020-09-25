@@ -45,11 +45,11 @@ These scripts are used to pull information from classic.warcraftlogs.com via the
 
 ### Other reports
 
-For other reports, clear the `add_<NAME>` sheet, then run the script:
+For other reports, run the scripts:
 
 - `python buffs.py`: Buffs
 - `python caster.py`: Caster
-- `python damage.py`: Damage - Sappers
+- `python damage.py`: Damage
 - `python deaths.py`: Deaths
 - `python paladin.py`: Paladins
 - `python priest.py`: Priests

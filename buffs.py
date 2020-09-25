@@ -1,7 +1,6 @@
 # Files
 from __future__ import division
 import secrets
-from sheets import update_sheet
 from library import get_reports, get_table
 
 # Libraries
@@ -21,7 +20,6 @@ gc = gspread.authorize(credentials)
 service = build('sheets', 'v4', http=credentials.authorize(Http()))
 
 wb = gc.open_by_key(secrets.google_sheet_id)
-wks = wb.worksheet('add_buffs')
 
 def get_buffs(reports, buff_ids):
   buffs = []
@@ -47,7 +45,8 @@ def main():
   print('Reports retrieved')
   buffs = get_buffs(reports, secrets.buff_ids)
   print('Buffs retrieved')
-  update_sheet(wks, buffs)
+  wks = wb.worksheet('buffs')
+  wks.append_rows(buffs, 'USER_ENTERED')
   print('Worksheet updated')
 
 if __name__ == '__main__':
