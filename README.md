@@ -53,10 +53,9 @@ For other reports, run the scripts:
 - `python deaths.py`: Deaths
 - `python paladin.py`: Paladins
 - `python priest.py`: Priests
-- `python promo.py`: Promotions
 - `python rogue.py`: Rogues
-- `python warrior.py`: Warriors
 - `python warlock.py`: Warlocks
+- `python warrior.py`: Warriors
 
 ## Post
 
