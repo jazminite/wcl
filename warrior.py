@@ -2,7 +2,7 @@
 from __future__ import division
 import secrets
 from sheets import update_sheet
-from library import get_reports, get_casts
+from library import get_reports, get_casts_type
 
 # Libraries
 import requests
@@ -63,7 +63,7 @@ def main():
 
   encounters = ['-3']
   abilities = ['12328', '24427', '25891']
-  start_info = get_casts(reports, 'casts', encounters, abilities)
+  start_info = get_casts_type(reports, 'casts', encounters, abilities, 'Warrior')
   abilities = ['11597']
   cast_info = get_debuffs(reports, 'debuffs', encounters, abilities, start_info)
   print('Cast info retrieved')

@@ -1,7 +1,7 @@
 # Files
 from __future__ import division
 import secrets
-from library import get_reports, get_casts
+from library import get_reports, get_casts_type
 
 # Libraries
 import requests
@@ -25,8 +25,8 @@ def main():
   reports = get_reports(secrets.raid_id, secrets.c_date)
   print('Reports retrieved')
   encounters = ['-3']
-  abilities = ['6346', '10060', '14751', '988']
-  cast_info = get_casts(reports, 'casts', encounters, abilities)
+  abilities = ['6346', '10060', '14751', '988', '17531']
+  cast_info = get_casts_type(reports, 'casts', encounters, abilities, 'Priest')
   print('Cast info retrieved')
   wks = wb.worksheet('priest')
   wks.append_rows(cast_info, 'USER_ENTERED')
