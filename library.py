@@ -65,6 +65,13 @@ def get_table(report, table, ability):
 
   return r.json()
 
+def get_encounter(report, table, encounter):
+  reportId = str(report['id'], 'utf-8')
+  print(report['date'], report['title'], reportId)
+  table_url = 'https://classic.warcraftlogs.com/v1/report/tables/%s/%s?end=36000000&by=source&encounter=%s&api_key=%s' % (table, reportId, encounter, secrets.warcraft_logs_api_key)
+  r = requests.get(table_url)
+  return r.json()
+
 def get_players(reports):
   players = []
   for report in reports:

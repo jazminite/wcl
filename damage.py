@@ -1,7 +1,7 @@
 # Files
 from __future__ import division
 import secrets
-from library import get_reports, get_table
+from library import get_reports, get_encounter
 
 # Libraries
 import requests
@@ -21,12 +21,16 @@ service = build('sheets', 'v4', http=credentials.authorize(Http()))
 
 wb = gc.open_by_key(secrets.google_sheet_id)
 
-def get_damage(reports, abilities):
+def get_damage(reports, encounters):
   damage = []
   for report in reports:
-    for ability in abilities:
-      r_json = get_table(report, 'damage-done', ability)
+    for encounter in encounters:
+      r_json = get_encounter(report, 'damage-done', encounter)
+      # totalTime = total combat time in milliseconds
+      combat_time = r_json['totalTime'] / 1000
       for player in r_json['entries']:
+        # DPS: player.total / (totalTime / 1000)
+        dps = player['total'] / combat_time
         new_row = [
           report['date'],
           str(report['id'], 'utf-8'),
@@ -34,7 +38,8 @@ def get_damage(reports, abilities):
           player['name'],
           player['id'],
           player['total'],
-          ability
+          dps,
+          encounter
         ]
         # print(new_row)
         damage.append(new_row)
@@ -44,10 +49,10 @@ def get_damage(reports, abilities):
 def main():
   reports = get_reports(secrets.raid_id, secrets.c_date)
   print('Reports retrieved')
-  abilities = ['13241', '23063']
-  damage = get_damage(reports,  abilities)
+  encounters = ['-3', '-2', '0']
+  damage = get_damage(reports, encounters)
   print('Damage retrieved')
-  wks = wb.worksheet('eng')
+  wks = wb.worksheet('damage')
   wks.append_rows(damage, 'USER_ENTERED')
   print('Worksheet updated')
 
