@@ -21,7 +21,6 @@ gc = gspread.authorize(credentials)
 service = build('sheets', 'v4', http=credentials.authorize(Http()))
 
 wb = gc.open_by_key(secrets.google_sheet_id)
-wks = wb.worksheet('add_promo')
 
 def get_raid_info(reports):
   raid_info = []
@@ -46,7 +45,8 @@ def main():
   print('Reports retrieved')
   raid_info = get_raid_info(reports)
   print('Raid info retrieved')
-  update_sheet(wks, raid_info)
+  wks = wb.worksheet('promo')
+  wks.append_rows(raid_info, 'USER_ENTERED')
   print('Worksheet updated')
 
 if __name__ == '__main__':
