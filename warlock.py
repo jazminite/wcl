@@ -24,8 +24,9 @@ wb = gc.open_by_key(secrets.google_sheet_id)
 def main():
   reports = get_reports(secrets.raid_id, secrets.c_date)
   print('Reports retrieved')
-  encounters = ['709', '710', '711', '712', '713', '714', '715', '716', '717', '0']
-  abilities = ['11717', '17937', '11722', '11713', '11672', '11661', '25307','704']
+  # encounters = ['709', '710', '711', '712', '713', '714', '715', '716', '717', '0'] # AQ40
+  encounters = ['1107', '1108', '1109', '1110', '1111', '1112', '1113', '1114', '1115', '1116', '1117', '1118', '1119', '1120', '1121', '0'] # Naxx
+  abilities = ['11717', '17937', '11722', '11713', '11672', '11661', '25307', '704', '11719', '11708']
   cast_info = get_casts(reports, 'casts', encounters, abilities)
   print('Cast info retrieved')
   wks = wb.worksheet('warlock')
