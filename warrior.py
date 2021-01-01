@@ -51,7 +51,9 @@ def get_debuffs(reports, table, encounters, abilities, sheet_info):
             uptime,
             uptime / total_time,
             ability,
-            encounter
+            encounter,
+            secrets.thisdict[encounter],
+            secrets.thisdict[ability]
           ]
           # print(new_row)
           sheet_info.append(new_row)

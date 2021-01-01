@@ -126,8 +126,8 @@ def get_casts(reports, table, encounters, abilities):
     print(report['date'], report['title'])
     for encounter in encounters:
       for ability in abilities:
-        table_url = 'https://classic.warcraftlogs.com/v1/report/tables/%s/%s?end=36000000&by=source&abilityid=%s&encounter=%s&api_key=%s' % (table, reportId, ability, encounter, secrets.warcraft_logs_api_key)
-        # print(table_url)
+        table_url = 'https://classic.warcraftlogs.com/v1/report/tables/%s/%s?end=36000000&by=source&abilityid=%s&encounter=%s&wipes=2&api_key=%s' % (table, reportId, ability, encounter, secrets.warcraft_logs_api_key)
+        print(ability)
         r = requests.get(table_url)
         r_json = r.json()
         total_time = r_json['totalTime']
@@ -149,7 +149,9 @@ def get_casts(reports, table, encounters, abilities):
             uptime,
             uptime / total_time,
             ability,
-            encounter
+            encounter,
+            secrets.thisdict[encounter],
+            secrets.thisdict[ability]
           ]
           # print(new_row)
           casts.append(new_row)
@@ -187,7 +189,9 @@ def get_casts_type(reports, table, encounters, abilities, clss):
               uptime,
               uptime / total_time,
               ability,
-              encounter
+              encounter,
+              secrets.thisdict[encounter],
+              secrets.thisdict[ability]
             ]
             # print(new_row)
             casts.append(new_row)

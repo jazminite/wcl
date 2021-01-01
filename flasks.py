@@ -33,7 +33,8 @@ def get_buffs(reports, buff_ids):
           str(report['title'], 'utf-8'),
           player['name'],
           player['id'],
-          ability
+          ability,
+          secrets.thisdict[ability]
         ]
         # print(new_row)
         buffs.append(new_row)

@@ -34,7 +34,8 @@ def get_damage(reports, abilities):
           player['name'],
           player['id'],
           player['total'],
-          ability
+          ability,
+          secrets.thisdict[ability]
         ]
         # print(new_row)
         damage.append(new_row)
@@ -44,7 +45,7 @@ def get_damage(reports, abilities):
 def main():
   reports = get_reports(secrets.raid_id, secrets.c_date)
   print('Reports retrieved')
-  abilities = ['13241', '23063']
+  abilities = ['13241', '23063', '17291']
   damage = get_damage(reports,  abilities)
   print('Damage retrieved')
   wks = wb.worksheet('eng')

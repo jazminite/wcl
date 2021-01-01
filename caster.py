@@ -40,6 +40,12 @@ def get_casts(reports, table, encounters, abilities):
           except:
             print('No uptime for ' + player['name'] + ' - ' + ability)
             uptime = 0
+            no_casts = 0
+
+          if ability == "24659":
+            calc_casts = no_casts / 12
+          else:
+            calc_casts = no_casts
 
           new_row = [
             report['date'],
@@ -51,7 +57,10 @@ def get_casts(reports, table, encounters, abilities):
             uptime,
             uptime / total_time,
             ability,
-            encounter
+            encounter,
+            calc_casts,
+            secrets.thisdict[encounter],
+            secrets.thisdict[ability]
           ]
           # print(new_row)
           casts.append(new_row)

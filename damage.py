@@ -39,7 +39,8 @@ def get_damage(reports, encounters):
           player['id'],
           player['total'],
           dps,
-          encounter
+          encounter,
+          secrets.thisdict[encounter]
         ]
         # print(new_row)
         damage.append(new_row)
