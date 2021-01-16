@@ -41,6 +41,7 @@ def get_debuffs(reports, table, encounters, abilities, sheet_info):
             # print('No uptime for ' + player['name'] + ' - ' + ability)
             uptime = 0
 
+          ability_name = 'Eff ' + secrets.thisdict[ability]
           new_row = [
             report['date'],
             str(report['id'], 'utf-8'),
@@ -53,7 +54,7 @@ def get_debuffs(reports, table, encounters, abilities, sheet_info):
             ability,
             encounter,
             secrets.thisdict[encounter],
-            secrets.thisdict[ability]
+            ability_name
           ]
           # print(new_row)
           sheet_info.append(new_row)
@@ -64,7 +65,7 @@ def main():
   print('Reports retrieved')
 
   encounters = ['-3']
-  abilities = ['12328', '24427', '25891']
+  abilities = ['11597', '12328', '24427', '25891']
   start_info = get_casts_type(reports, 'casts', encounters, abilities, 'Warrior')
   abilities = ['11597']
   cast_info = get_debuffs(reports, 'debuffs', encounters, abilities, start_info)
