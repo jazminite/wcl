@@ -52,6 +52,7 @@ For other reports, run the scripts:
 - `python damage.py`: Damage
 - `python deaths.py`: Deaths
 - `python eng.py`: Engineering damage
+- `python mage.py`: Mages
 - `python paladin.py`: Paladins
 - `python priest.py`: Priests
 - `python rogue.py`: Rogues
