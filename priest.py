@@ -25,7 +25,7 @@ def main():
   reports = get_reports(secrets.raid_id, secrets.c_date)
   print('Reports retrieved')
   encounters = ['-3']
-  abilities = ['6346', '10060', '14751', '988', '17531']
+  abilities = ['6346', '10060', '14751', '988', '17531', '27869', '16666']
   cast_info = get_casts_type(reports, 'casts', encounters, abilities, 'Priest')
   print('Cast info retrieved')
   wks = wb.worksheet('priest')
