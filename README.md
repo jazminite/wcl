@@ -1,6 +1,13 @@
 # Warcraft Log Scripts
 
-These scripts are used to pull information from classic.warcraftlogs.com via their API.
+These scripts are used to pull information from classic.warcraftlogs.com via the [Warcraft Logs v1 API](https://classic.warcraftlogs.com/v1/docs).
+
+## Prerequisites
+
+- [Warcraft logs API key](https://classic.warcraftlogs.com/profile)
+- [Python](https://www.python.org/downloads/)
+- pip: Windows users see [this article](https://www.liquidweb.com/kb/install-pip-windows/)
+- [Optional] [Visual Studio Code](https://code.visualstudio.com/download)
 
 ## Setup
 ### Secrets file
@@ -23,7 +30,7 @@ These scripts are used to pull information from classic.warcraftlogs.com via the
 
 ### Google spreadsheet
 
-- Set up sheets similar to the example file 
+- Set up sheet tabs with names based on the reports you are running
 
 ## Usage
 
