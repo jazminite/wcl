@@ -1,4 +1,4 @@
 *.pyc
-secrets.py
+secrets*
 test.py
 Quintessential-ea11c906ca6c.json

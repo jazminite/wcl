@@ -4,7 +4,7 @@ These scripts are used to pull information from classic.warcraftlogs.com via the
 
 ## Prerequisites
 
-- [Warcraft logs v1 API key](https://classic.warcraftlogs.com/profile)
+- [Warcraft logs v1 API key](https://classic.warcraftlogs.com/profile) - make sure to name your key
 - [Python](https://www.python.org/downloads/)
 - pip: Windows users see [this article](https://www.liquidweb.com/kb/install-pip-windows/)
 - `git clone` the repo
