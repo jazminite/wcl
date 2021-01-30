@@ -29,7 +29,7 @@ def get_parses(players, table):
     if player in secrets.healers:
       spec = 'hps'
       print('Healer')
-    request_url = 'https://classic.warcraftlogs.com/v1/parses/character/%s/Faerlina/US?api_key=%s&timeframe=historical&metric=%s' % (player, secrets.warcraft_logs_api_key, spec)
+    request_url = 'https://classic.warcraftlogs.com/v1/parses/character/%s/%s/US?api_key=%s&timeframe=historical&metric=%s' % (player, secrets.server, secrets.warcraft_logs_api_key, spec)
     r = requests.get(request_url)
     char_parse = r.json()
 

@@ -10,7 +10,7 @@ import gspread
 import time
 
 def get_reports(zone, c_date):
-  r = requests.get('https://classic.warcraftlogs.com/v1/reports/guild/%s/Faerlina/US?api_key=%s' % (secrets.guild, secrets.warcraft_logs_api_key))
+  r = requests.get('https://classic.warcraftlogs.com/v1/reports/guild/%s/%s/US?api_key=%s' % (secrets.guild, secrets.server, secrets.warcraft_logs_api_key))
   r_json = r.json()
 
   reports = []
@@ -32,7 +32,7 @@ def get_reports(zone, c_date):
   return reports
 
 def get_all_reports(c_date):
-  r = requests.get('https://classic.warcraftlogs.com/v1/reports/guild/%s/Faerlina/US?api_key=%s' % (secrets.guild, secrets.warcraft_logs_api_key))
+  r = requests.get('https://classic.warcraftlogs.com/v1/reports/guild/%s/%s/US?api_key=%s' % (secrets.guild, secrets.server, secrets.warcraft_logs_api_key))
   r_json = r.json()
 
   reports = []
