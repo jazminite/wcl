@@ -27,8 +27,11 @@ These scripts are used to pull information from classic.warcraftlogs.com via the
 - Add the name of the JSON file to `secrets.py`
 - Create a Google spreadsheet
 - Share the Google spreadsheet with the `client_email` listed in the JSON file
-- `pip install --upgrade google-api-python-client oauth2client`
-- `pip install gspread`
+- Run these commands:
+
+    `pip install --upgrade google-api-python-client oauth2client`
+
+    `pip install gspread`
 
 ### Google spreadsheet
 
