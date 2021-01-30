@@ -20,7 +20,8 @@ These scripts are used to pull information from classic.warcraftlogs.com via the
 - Create a Project at https://console.developers.google.com/cloud-resource-manager
 - Add the Google Sheets API
 - Add the Google Drive API
-- Create Credentials
+- Add a **Service Account**
+- Create a key for the Service Account (JSON)
 - Put the JSON file in the project directory
 - Add the JSON file name to .gitignore
 - Add the name of the JSON file to `secrets.py`
