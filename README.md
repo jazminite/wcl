@@ -35,25 +35,11 @@ These scripts are used to pull information from classic.warcraftlogs.com via the
 
 ## Usage
 
-### Parses
+BEFORE running any reports, update the `c_date` in `secrets.py`.
 
-1. `secrets.py`: Update the date
-2. `players`: Remove data from columns A to C
-2. `python main.py`: Get a list of players from recent reports
-3. `player-export`: Export the guild roster from the game
-4. `players`: Copy new players from column B to F, Filter out people not in the guild
-5. `current-players`: Update current players with the teams spreadsheet
-6. `players`: Update missing player specs
-7. `secrets.py`: Update healers array
-8. `add_parse`: Clear sheet
-9. `python parses.py`: Run the parse script
-10. `parses`: Add new data from `add_parse`
-11. `players`: Filter / highlight based on the Parse sheet column
-12. `Parses over`: Paste Player column from `players`, drag formulas, sort, increase date field, remove people with zero parse
+### EZ reports
 
-### Other reports
-
-For other reports, run the scripts:
+Run the scripts:
 
 - `python buffs.py`: Buffs
 - `python caster.py`: Caster
@@ -66,3 +52,20 @@ For other reports, run the scripts:
 - `python rogue.py`: Rogues
 - `python warlock.py`: Warlocks
 - `python warrior.py`: Warriors
+
+### Parses
+
+These instructions are specific to my Google spreadsheet.
+
+1. `players`: Remove data from columns A to C
+2. `python main.py`: Get a list of players from recent reports
+3. `player-export`: Export the guild roster from the game
+4. `players`: Copy new players from column B to F, Filter out people not in the guild
+5. `current-players`: Update current players with the teams spreadsheet
+6. `players`: Update missing player specs
+7. `secrets.py`: Update healers array
+8. `add_parse`: Clear sheet
+9. `python parses.py`: Run the parse script
+10. `parses`: Add new data from `add_parse`
+11. `players`: Filter / highlight based on the Parse sheet column
+12. `Parses over`: Paste Player column from `players`, drag formulas, sort, increase date field, remove people with zero parse
