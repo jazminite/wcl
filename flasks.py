@@ -1,6 +1,6 @@
 # Files
 from __future__ import division
-import secrets
+import secrets, lookup
 from library import get_reports, get_table
 
 # Libraries
@@ -34,7 +34,7 @@ def get_buffs(reports, buff_ids):
           player['name'],
           player['id'],
           ability,
-          secrets.thisdict[ability]
+          lookup.thisdict[ability]
         ]
         # print(new_row)
         buffs.append(new_row)

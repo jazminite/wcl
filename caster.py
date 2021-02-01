@@ -1,6 +1,6 @@
 # Files
 from __future__ import division
-import secrets
+import secrets, lookup
 from library import get_reports
 
 # Libraries
@@ -59,8 +59,8 @@ def get_casts(reports, table, encounters, abilities):
             ability,
             encounter,
             calc_casts,
-            secrets.thisdict[encounter],
-            secrets.thisdict[ability]
+            lookup.thisdict[encounter],
+            lookup.thisdict[ability]
           ]
           # print(new_row)
           casts.append(new_row)
@@ -71,7 +71,7 @@ def main():
   reports = get_reports(secrets.raid_id, secrets.c_date)
   print('Reports retrieved')
   encounters = ['-3']
-  abilities = ['23271','24659', '23723', '28779']
+  abilities = ['26400', '24544']
   cast_info = get_casts(reports, 'buffs', encounters, abilities)
   print('Cast info retrieved')
   wks = wb.worksheet('caster')

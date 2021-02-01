@@ -1,6 +1,6 @@
 # Files
 from __future__ import division
-import secrets
+import secrets, lookup
 from sheets import update_sheet
 
 # Libraries
@@ -150,8 +150,8 @@ def get_casts(reports, table, encounters, abilities):
             uptime / total_time,
             ability,
             encounter,
-            secrets.thisdict[encounter],
-            secrets.thisdict[ability]
+            lookup.thisdict[encounter],
+            lookup.thisdict[ability]
           ]
           # print(new_row)
           casts.append(new_row)
@@ -190,8 +190,8 @@ def get_casts_type(reports, table, encounters, abilities, clss):
               uptime / total_time,
               ability,
               encounter,
-              secrets.thisdict[encounter],
-              secrets.thisdict[ability]
+              lookup.thisdict[encounter],
+              lookup.thisdict[ability]
             ]
             # print(new_row)
             casts.append(new_row)

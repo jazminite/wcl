@@ -1,6 +1,6 @@
 # Files
 from __future__ import division
-import secrets
+import secrets, lookup
 from library import get_reports, get_encounter
 
 # Libraries
@@ -40,7 +40,7 @@ def get_damage(reports, encounters):
           player['total'],
           dps,
           encounter,
-          secrets.thisdict[encounter]
+          lookup.thisdict[encounter]
         ]
         # print(new_row)
         damage.append(new_row)

@@ -1,6 +1,6 @@
 # Files
 from __future__ import division
-import secrets
+import secrets, lookup
 from sheets import update_sheet
 from library import get_reports, get_casts_type
 
@@ -41,7 +41,7 @@ def get_effective(reports, table, encounters, abilities, expression, sheet_info)
             # print('No uptime for ' + player['name'] + ' - ' + ability)
             uptime = 0
 
-          ability_name = secrets.thisdict[ability] + '-Eff'
+          ability_name = lookup.thisdict[ability] + '-Eff'
           new_row = [
             report['date'],
             str(report['id'], 'utf-8'),
@@ -53,7 +53,7 @@ def get_effective(reports, table, encounters, abilities, expression, sheet_info)
             uptime / total_time,
             ability,
             encounter,
-            secrets.thisdict[encounter],
+            lookup.thisdict[encounter],
             ability_name
           ]
           # print(new_row)

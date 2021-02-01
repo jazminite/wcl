@@ -1,6 +1,6 @@
 # Files
 from __future__ import division
-import secrets
+import secrets, lookup
 from library import get_reports, get_table
 
 # Libraries
@@ -35,7 +35,7 @@ def get_damage(reports, abilities):
           player['id'],
           player['total'],
           ability,
-          secrets.thisdict[ability]
+          lookup.thisdict[ability]
         ]
         # print(new_row)
         damage.append(new_row)
