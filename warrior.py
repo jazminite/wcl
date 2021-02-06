@@ -65,7 +65,7 @@ def main():
   print('Reports retrieved')
 
   encounters = ['-3']
-  abilities = ['11597', '12328', '24427', '25891']
+  abilities = ['11597', '12328', '24427', '25891', '26400', '676', '28866', '5579']
   start_info = get_casts_type(reports, 'casts', encounters, abilities, 'Warrior')
   abilities = ['11597']
   expression = 'type%3D%22cast%22%20AND%20ability.id%3D11597%20AND%20NOT%20IN%20RANGE%20FROM%20type%3D%22applydebuffstack%22%20AND%20ability.id%3D11597%20AND%20stack%3D5%20TO%20type%3D%22removedebuff%22%20AND%20ability.id%3D11597%20GROUP%20BY%20target%20ON%20target%20END'

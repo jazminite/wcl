@@ -6,6 +6,7 @@ thisdict = {
     "-2": "Bosses",
     "0": "Trash",
     "475": "Decurse",
+    "676": "Disarm",
     "704": "CoR R1",
     "709": "Skeram",
     "710": "Bug Trio",
@@ -35,6 +36,7 @@ thisdict = {
     "1769": "Kick",
     "1953": "Blink",
     "4987": "Cleanse",
+    "5579": "PVP",
     "6346": "Fear Ward",
     "9512": "Thistle tea",
     "10052": "Mana stone",
@@ -87,4 +89,5 @@ thisdict = {
     "27869": "Dark-Dem Rune",
     "28609": "Frost Ward",
     "28779": "EoS",
+    "28866": "Kiss",
 }
