@@ -92,7 +92,7 @@ def get_player_rows(reports):
   for report in reports:
     report_id = str(report['id'],'utf-8')
     url = 'https://classic.warcraftlogs.com/v1/report/fights/%s?api_key=%s' % (report_id, secrets.warcraft_logs_api_key)
-    print(url)
+    # print(url)
     r = requests.get(url)
     r_json = r.json()
     for player in r_json['exportedCharacters']:
@@ -127,7 +127,7 @@ def get_casts(reports, table, encounters, abilities):
     for encounter in encounters:
       for ability in abilities:
         table_url = 'https://classic.warcraftlogs.com/v1/report/tables/%s/%s?end=36000000&by=source&abilityid=%s&encounter=%s&wipes=2&api_key=%s' % (table, reportId, ability, encounter, secrets.warcraft_logs_api_key)
-        print(ability)
+        # print(ability)
         r = requests.get(table_url)
         r_json = r.json()
         total_time = r_json['totalTime']
