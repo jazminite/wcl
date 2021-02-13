@@ -43,7 +43,7 @@ BEFORE running any reports, update the `c_date` in `secrets.py`.
 
 ### EZ reports
 
-Run the scripts:
+Run ALL the scripts using `python run.py` or run individual scripts:
 
 - `python buffs.py`: Buffs
 - `python caster.py`: Caster
