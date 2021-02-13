@@ -4,6 +4,7 @@ import buffs        # Buffs
 import caster       # Caster
 import damage       # Damage
 import deaths       # Deaths
+import druid        # Druids
 import eng          # Engineering damage
 import mage         # Mages
 import paladin      # Paladins
@@ -24,6 +25,9 @@ if __name__ == '__main__':
     time.sleep(15)
     print('Getting Deaths...')
     deaths.main()
+    time.sleep(15)
+    print('Getting Druid...')
+    druid.main()
     time.sleep(15)
     print('Getting Eng...')
     eng.main()

@@ -49,6 +49,7 @@ Run ALL the scripts using `python run.py` or run individual scripts:
 - `python caster.py`: Caster
 - `python damage.py`: Damage
 - `python deaths.py`: Deaths
+- `python druid.py`: Druids
 - `python eng.py`: Engineering damage
 - `python mage.py`: Mages
 - `python paladin.py`: Paladins
