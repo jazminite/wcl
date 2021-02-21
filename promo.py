@@ -41,7 +41,7 @@ def get_raid_info(reports):
   return raid_info
 
 def main():
-  reports = get_all_reports(secrets.c_date)
+  reports = get_all_reports(secrets.p_date)
   print('Reports retrieved')
   raid_info = get_raid_info(reports)
   print('Raid info retrieved')
