@@ -166,7 +166,7 @@ def get_casts_type(reports, table, encounters, abilities, clss):
     for encounter in encounters:
       for ability in abilities:
         table_url = 'https://classic.warcraftlogs.com/v1/report/tables/%s/%s?end=36000000&by=source&abilityid=%s&encounter=%s&api_key=%s' % (table, reportId, ability, encounter, secrets.warcraft_logs_api_key)
-        # print(table_url)
+        print(table_url)
         r = requests.get(table_url)
         r_json = r.json()
         total_time = r_json['totalTime']
