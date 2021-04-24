@@ -1,6 +1,6 @@
 # Files
 from __future__ import division
-import secrets
+import secrets, lookup
 from sheets import update_sheet
 from library import get_all_reports, get_table, get_friendlies
 
@@ -27,13 +27,15 @@ def get_raid_info(reports):
   for report in reports:
     players = get_friendlies(report)
     for player in players:
+      zone = str(report['zone'])
       new_row = [
         report['date'],
         str(report['id'], 'utf-8'),
         str(report['title'], 'utf-8'),
-        report['zone'],
-        player['name'],
         player['id'],
+        player['name'],
+        zone,
+        lookup.thisdict[zone]
       ]
       # print(new_row)
       raid_info.append(new_row)

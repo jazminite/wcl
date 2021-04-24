@@ -7,6 +7,7 @@ import deaths       # Deaths
 import druid        # Druids
 import eng          # Engineering damage
 import mage         # Mages
+import melee        # Melee
 import paladin      # Paladins
 import priest       # Priests
 import rogue        # Rogues
@@ -34,6 +35,9 @@ if __name__ == '__main__':
     time.sleep(15)
     print('Getting Mage...')
     mage.main()
+    time.sleep(15)
+    print('Getting Melee...')
+    melee.main()
     time.sleep(15)
     print('Getting Paladin...')
     paladin.main()
