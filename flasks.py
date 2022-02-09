@@ -44,7 +44,7 @@ def get_buffs(reports, buff_ids):
 def main():
   reports = get_reports(secrets.raid_id, secrets.c_date)
   print('Reports retrieved')
-  buff_ids = ['17626', '17627', '17628']
+  buff_ids = ['17626', '17627', '17628', '28520', '28521', '28540', '41606', '46838', '46840']
   buffs = get_buffs(reports, buff_ids)
   print('Buffs retrieved')
   wks = wb.worksheet('flasks')
